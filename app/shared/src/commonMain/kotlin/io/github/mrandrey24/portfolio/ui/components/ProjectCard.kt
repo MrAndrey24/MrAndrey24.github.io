@@ -1,10 +1,13 @@
 package io.github.mrandrey24.portfolio.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import io.github.mrandrey24.portfolio.ui.data.Project
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ProjectCard(
     project: Project,
@@ -42,24 +46,25 @@ fun ProjectCard(
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Project Info (Left Side)
-        Row(
+        Column(
             modifier = Modifier.weight(1f),
-            verticalAlignment = Alignment.CenterVertically
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Text(
                 text = project.title,
                 style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.padding(end = 12.dp)
+                color = MaterialTheme.colorScheme.onSurface
             )
 
-            // Technology stack list separated by dots
-            val techString = project.techs.joinToString(" · ")
-            Text(
-                text = techString,
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            // Technology stack badges
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                project.techs.forEach { tech ->
+                    TechBadge(name = tech)
+                }
+            }
         }
 
         // Action Indicator (Right Side)

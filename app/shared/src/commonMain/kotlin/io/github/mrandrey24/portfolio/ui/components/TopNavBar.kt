@@ -33,7 +33,7 @@ fun TopNavBar(
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
-        // Nav: Home / Posts
+        // Nav
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
