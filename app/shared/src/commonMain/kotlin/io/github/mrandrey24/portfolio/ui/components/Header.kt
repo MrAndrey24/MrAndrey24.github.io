@@ -10,14 +10,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun Header(modifier: Modifier = Modifier) {
+
+    val uriHandler = LocalUriHandler.current
+
+    val links = listOf(
+        "Github" to "https://github.com/MrAndrey24",
+        "LinkedIn" to "https://www.linkedin.com/in/aacostar24/"
+    )
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -31,30 +36,12 @@ fun Header(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(bottom = 24.dp)
         )
 
-        // Bio Text
-        val bioText = buildAnnotatedString {
-            append("I'm a")
-            withStyle(SpanStyle(color = MaterialTheme.colorScheme.secondary, fontWeight = FontWeight.Medium)) {
-                append("costa rican developer")
-            }
-            append(" 🇨🇷. I consider programming a ")
-            withStyle(SpanStyle(color = MaterialTheme.colorScheme.secondary, fontWeight = FontWeight.Medium)) {
-                append("creative act")
-            }
-            append(". Currently, I am working in a movement called ")
-            withStyle(SpanStyle(color = MaterialTheme.colorScheme.secondary, fontWeight = FontWeight.Medium)) {
-                append("#")
-            }
-            append(". See my  in the ")
-            withStyle(SpanStyle(color = MaterialTheme.colorScheme.secondary, fontWeight = FontWeight.Medium)) {
-                append("links bellow")
-            }
-            append(" and check my work.")
-        }
-
         Text(
-            text = bioText,
-            style = MaterialTheme.typography.bodyMedium,
+            text = "I'm a Software Engineer dedicated to crafting " +
+                    "high-performance cross-platform applications and scalable " +
+                    "backend systems. Currently focusing on building bridges " +
+                    "between mobile and web ecosystems.",
+            style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(bottom = 32.dp)
         )
@@ -64,14 +51,13 @@ fun Header(modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
-            val links = listOf("X", "Bento", "Github", "Newsletter")
-            links.forEachIndexed { index, linkName ->
+            links.forEachIndexed { index, (linkName, url) ->
                 Text(
                     text = linkName,
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.clickable {
-                        // Click action for links
+                        uriHandler.openUri(url)
                     }
                 )
 

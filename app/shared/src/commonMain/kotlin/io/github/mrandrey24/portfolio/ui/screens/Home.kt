@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import io.github.mrandrey24.portfolio.ui.components.Header
@@ -60,6 +61,7 @@ fun Home(
     onNavigate: (Screen) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val uriHandler = LocalUriHandler.current
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -144,18 +146,23 @@ fun Home(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Social Links Row (Footer)
+        // Footer
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
-            val links = listOf("X", "Bento", "Github", "Newsletter")
-            links.forEachIndexed { index, linkName ->
+            val links = listOf(
+                "Github" to "https://github.com/MrAndrey24",
+                "LinkedIn" to "https://www.linkedin.com/in/aacostar24/"
+            )
+            links.forEachIndexed { index, (linkName, url) ->
                 Text(
                     text = linkName,
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.clickable { /* Link click action */ }
+                    modifier = Modifier.clickable {
+                        uriHandler.openUri(url)
+                    }
                 )
 
                 if (index < links.lastIndex) {
