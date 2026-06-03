@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.mrandrey24.portfolio.ui.components.PostCard
+import io.github.mrandrey24.portfolio.ui.data.posts
 
 @Composable
 fun Posts(
@@ -42,7 +43,7 @@ fun Posts(
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            mockPosts.forEach { post ->
+            posts.forEach { post ->
                 PostCard(
                     post = post,
                     onClick = { /* Navigate to post details */ }

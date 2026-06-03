@@ -21,40 +21,9 @@ import androidx.compose.ui.unit.dp
 import io.github.mrandrey24.portfolio.ui.components.Header
 import io.github.mrandrey24.portfolio.ui.components.PostCard
 import io.github.mrandrey24.portfolio.ui.components.ProjectCard
-import io.github.mrandrey24.portfolio.ui.data.Project
-import io.github.mrandrey24.portfolio.ui.data.Props
 import io.github.mrandrey24.portfolio.ui.data.enums.Screen
-
-// Mock Data
-val mockProjects = listOf(
-    Project(
-        title = "Hacienda CLI",
-        techs = listOf("Go", "Cosign", "MkDocs", "Medium Story"),
-        link = "https://github.com/kevinah95/hacienda-cli",
-        isComingSoon = false
-    ),
-    Project(
-        title = "Portfolio",
-        techs = listOf("Astro"),
-        link = "https://github.com/kevinah95/portfolio",
-        isComingSoon = false
-    ),
-    Project(
-        title = "Hecho en Costa Rica",
-        techs = listOf("Astro"),
-        link = "",
-        isComingSoon = true
-    )
-)
-
-val mockPosts = listOf(
-    Props(
-        title = "",
-        publishedAt = "24/07/2003",
-        description = "",
-        slug = ""
-    )
-)
+import io.github.mrandrey24.portfolio.ui.data.posts
+import io.github.mrandrey24.portfolio.ui.data.projects
 
 @Composable
 fun Home(
@@ -97,7 +66,7 @@ fun Home(
         Spacer(modifier = Modifier.height(16.dp))
 
         // Render latest post
-        mockPosts.firstOrNull()?.let { post ->
+        posts.firstOrNull()?.let { post ->
             PostCard(
                 post = post,
                 onClick = { /* Navigate to post details / link */ }
@@ -108,7 +77,7 @@ fun Home(
 
         // Selected Projects Section
         Text(
-            text = "Selected projects (${mockProjects.size})",
+            text = "Selected projects (${projects.size})",
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onBackground
         )
@@ -119,10 +88,12 @@ fun Home(
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            mockProjects.forEach { project ->
+            projects.forEach { project ->
                 ProjectCard(
                     project = project,
-                    onClick = { /* Open project link */ }
+                    onClick = {
+                        uriHandler.openUri(project.link)
+                    }
                 )
             }
         }
