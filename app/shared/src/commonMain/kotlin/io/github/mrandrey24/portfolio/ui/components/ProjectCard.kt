@@ -27,68 +27,60 @@ import io.github.mrandrey24.portfolio.ui.data.Project
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun ProjectCard(
-    project: Project,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val isSoon = project.isComingSoon == true
+fun ProjectCard(project: Project, onClick: () -> Unit, modifier: Modifier = Modifier) {
+  val isSoon = project.isComingSoon == true
 
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(8.dp))
-            .background(MaterialTheme.colorScheme.surface)
-            .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(8.dp))
-            .clickable(enabled = !isSoon) { onClick() }
-            .padding(horizontal = 16.dp, vertical = 20.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        // Project Info (Left Side)
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            Text(
-                text = project.title,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+  Row(
+      modifier =
+          modifier
+              .fillMaxWidth()
+              .clip(RoundedCornerShape(8.dp))
+              .background(MaterialTheme.colorScheme.surface)
+              .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(8.dp))
+              .clickable(enabled = !isSoon) { onClick() }
+              .padding(horizontal = 16.dp, vertical = 20.dp),
+      horizontalArrangement = Arrangement.SpaceBetween,
+      verticalAlignment = Alignment.CenterVertically,
+  ) {
+    // Project Info (Left Side)
+    Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+      Text(
+          text = project.title,
+          style = MaterialTheme.typography.titleMedium,
+          color = MaterialTheme.colorScheme.onSurface,
+      )
 
-            // Technology stack badges
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                verticalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                project.techs.forEach { tech ->
-                    TechBadge(name = tech)
-                }
-            }
-        }
-
-        // Action Indicator (Right Side)
-        if (isSoon) {
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(4.dp))
-                    .background(MaterialTheme.colorScheme.outline)
-                    .padding(horizontal = 8.dp, vertical = 4.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Soon",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        } else {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.OpenInNew,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(14.dp)
-            )
-        }
+      // Technology stack badges
+      FlowRow(
+          horizontalArrangement = Arrangement.spacedBy(6.dp),
+          verticalArrangement = Arrangement.spacedBy(6.dp),
+      ) {
+        project.techs.forEach { tech -> TechBadge(name = tech) }
+      }
     }
+
+    // Action Indicator (Right Side)
+    if (isSoon) {
+      Box(
+          modifier =
+              Modifier.clip(RoundedCornerShape(4.dp))
+                  .background(MaterialTheme.colorScheme.outline)
+                  .padding(horizontal = 8.dp, vertical = 4.dp),
+          contentAlignment = Alignment.Center,
+      ) {
+        Text(
+            text = "Soon",
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+      }
+    } else {
+      Icon(
+          imageVector = Icons.AutoMirrored.Filled.OpenInNew,
+          contentDescription = null,
+          tint = MaterialTheme.colorScheme.primary,
+          modifier = Modifier.size(14.dp),
+      )
+    }
+  }
 }
