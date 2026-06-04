@@ -9,18 +9,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import io.github.mrandrey24.portfolio.ui.App
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    enableEdgeToEdge()
+    super.onCreate(savedInstanceState)
 
-        setContent {
-            App()
-        }
-    }
+    setContent { App() }
+  }
 }
 
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    App()
+  App()
 }

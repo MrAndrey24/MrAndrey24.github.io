@@ -14,56 +14,50 @@ import androidx.compose.ui.unit.dp
 import io.github.mrandrey24.portfolio.ui.data.enums.Screen
 
 @Composable
-fun TopNavBar(
-    currentScreen: Screen,
-    onNavigate: (Screen) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(vertical = 24.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        // Email
-        Text(
-            text = "andreyacostar@gmail.com",
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+fun TopNavBar(currentScreen: Screen, onNavigate: (Screen) -> Unit, modifier: Modifier = Modifier) {
+  Row(
+      modifier = modifier.fillMaxWidth().padding(vertical = 24.dp),
+      horizontalArrangement = Arrangement.SpaceBetween,
+      verticalAlignment = Alignment.CenterVertically,
+  ) {
+    // Email
+    Text(
+        text = "andreyacostar@gmail.com",
+        style = MaterialTheme.typography.labelLarge,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
 
-        // Nav
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Home",
-                style = MaterialTheme.typography.labelLarge,
-                color = if (currentScreen == Screen.HOME) {
-                    MaterialTheme.colorScheme.onSurface
-                } else {
-                    MaterialTheme.colorScheme.onSurfaceVariant
-                },
-                modifier = Modifier.clickable { onNavigate(Screen.HOME) }
-            )
+    // Nav
+    Row(verticalAlignment = Alignment.CenterVertically) {
+      Text(
+          text = "Home",
+          style = MaterialTheme.typography.labelLarge,
+          color =
+              if (currentScreen == Screen.HOME) {
+                MaterialTheme.colorScheme.onSurface
+              } else {
+                MaterialTheme.colorScheme.onSurfaceVariant
+              },
+          modifier = Modifier.clickable { onNavigate(Screen.HOME) },
+      )
 
-            Text(
-                text = "  /  ",
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+      Text(
+          text = "  /  ",
+          style = MaterialTheme.typography.labelLarge,
+          color = MaterialTheme.colorScheme.onSurfaceVariant,
+      )
 
-            Text(
-                text = "Posts",
-                style = MaterialTheme.typography.labelLarge,
-                color = if (currentScreen == Screen.POSTS) {
-                    MaterialTheme.colorScheme.onSurface
-                } else {
-                    MaterialTheme.colorScheme.onSurfaceVariant
-                },
-                modifier = Modifier.clickable { onNavigate(Screen.POSTS) }
-            )
-        }
+      Text(
+          text = "Posts",
+          style = MaterialTheme.typography.labelLarge,
+          color =
+              if (currentScreen == Screen.POSTS) {
+                MaterialTheme.colorScheme.onSurface
+              } else {
+                MaterialTheme.colorScheme.onSurfaceVariant
+              },
+          modifier = Modifier.clickable { onNavigate(Screen.POSTS) },
+      )
     }
+  }
 }

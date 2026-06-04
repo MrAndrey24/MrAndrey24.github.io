@@ -20,34 +20,23 @@ import io.github.mrandrey24.portfolio.ui.screens.Home
 import io.github.mrandrey24.portfolio.ui.screens.Posts
 
 @Composable
-fun AppNavigation(
-    modifier: Modifier = Modifier
-) {
-    var currentScreen by remember { mutableStateOf(Screen.HOME) }
+fun AppNavigation(modifier: Modifier = Modifier) {
+  var currentScreen by remember { mutableStateOf(Screen.HOME) }
 
-    // Centered layout shell
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 24.dp),
-        contentAlignment = Alignment.TopCenter
-    ) {
-        Column(
-            modifier = Modifier
-                .widthIn(max = 800.dp)
-                .fillMaxWidth()
-        ) {
-            // Persistent Nav Header
-            TopNavBar(
-                currentScreen = currentScreen,
-                onNavigate = { screen -> currentScreen = screen }
-            )
+  // Centered layout shell
+  Box(
+      modifier = modifier.fillMaxSize().padding(horizontal = 24.dp),
+      contentAlignment = Alignment.TopCenter,
+  ) {
+    Column(modifier = Modifier.widthIn(max = 800.dp).fillMaxWidth()) {
+      // Persistent Nav Header
+      TopNavBar(currentScreen = currentScreen, onNavigate = { screen -> currentScreen = screen })
 
-            // Content Area
-            when (currentScreen) {
-                Screen.HOME -> Home(onNavigate = { screen -> currentScreen = screen })
-                Screen.POSTS -> Posts()
-            }
-        }
+      // Content Area
+      when (currentScreen) {
+        Screen.HOME -> Home(onNavigate = { screen -> currentScreen = screen })
+        Screen.POSTS -> Posts()
+      }
     }
+  }
 }

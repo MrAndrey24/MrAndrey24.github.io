@@ -6,7 +6,5 @@ import io.github.mrandrey24.portfolio.ui.App
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    ComposeViewport {
-        App()
-    }
+  ComposeViewport { App() }
 }

@@ -40,163 +40,150 @@ import portfolio.app.shared.generated.resources.github_dark
 import portfolio.app.shared.generated.resources.linkedin
 
 @Composable
-fun Home(
-    onNavigate: (Screen) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val uriHandler = LocalUriHandler.current
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
-            .padding(bottom = 48.dp)
+fun Home(onNavigate: (Screen) -> Unit, modifier: Modifier = Modifier) {
+  val uriHandler = LocalUriHandler.current
+  Column(
+      modifier =
+          modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(bottom = 48.dp)
+  ) {
+    // Hero Header
+    Header()
+
+    Spacer(modifier = Modifier.height(24.dp))
+
+    // Latest Posts Section
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        // Hero Header
-        Header()
+      Text(
+          text = "Latest posts",
+          style = MaterialTheme.typography.titleLarge,
+          color = MaterialTheme.colorScheme.onBackground,
+      )
 
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Latest Posts Section
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Latest posts",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            Text(
-                text = "See all posts",
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textDecoration = TextDecoration.Underline,
-                modifier = Modifier.clickable { onNavigate(Screen.POSTS) }
-            )
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Render latest post
-        posts.firstOrNull()?.let { post ->
-            PostCard(
-                post = post,
-                onClick = { /* Navigate to post details / link */ }
-            )
-        }
-
-        Spacer(modifier = Modifier.height(48.dp))
-
-        // Selected Projects Section
-        Text(
-            text = "Selected projects (${projects.size})",
-            style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onBackground
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Projects List
-        Column(
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            projects.forEach { project ->
-                ProjectCard(
-                    project = project,
-                    onClick = {
-                        uriHandler.openUri(project.link)
-                    }
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(48.dp))
-
-        // Get in touch Section
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(
-                text = "Get in touch",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Icon(
-                    painter = painterResource(Res.drawable.flag_cr),
-                    contentDescription = "Costa Rica Flag",
-                    tint = Color.Unspecified,
-                    modifier = Modifier.size(width = 14.dp, height = 9.dp)
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            text = "Email me at andreyacostar@gmail.com or follow me via my social links.",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Footer
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            val links = listOf(
-                "Github" to "https://github.com/MrAndrey24",
-                "LinkedIn" to "https://www.linkedin.com/in/aacostar24/"
-            )
-            links.forEach { (linkName, url) ->
-                val painter = when (linkName.lowercase()) {
-                    "github" -> painterResource(Res.drawable.github_dark)
-                    "linkedin" -> painterResource(Res.drawable.linkedin)
-                    else -> null
-                }
-
-                Row(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(MaterialTheme.colorScheme.surface)
-                        .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(8.dp))
-                        .clickable { uriHandler.openUri(url) }
-                        .padding(horizontal = 14.dp, vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    if (painter != null) {
-                        Icon(
-                            painter = painter,
-                            contentDescription = linkName,
-                            tint = Color.Unspecified,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    } else {
-                        Icon(
-                            imageVector = Icons.Default.Link,
-                            contentDescription = linkName,
-                            tint = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
-                    Text(
-                        text = linkName,
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-            }
-        }
+      Text(
+          text = "See all posts",
+          style = MaterialTheme.typography.labelLarge,
+          color = MaterialTheme.colorScheme.onSurfaceVariant,
+          textDecoration = TextDecoration.Underline,
+          modifier = Modifier.clickable { onNavigate(Screen.POSTS) },
+      )
     }
+
+    Spacer(modifier = Modifier.height(16.dp))
+
+    // Render latest post
+    posts.firstOrNull()?.let { post ->
+      PostCard(post = post, onClick = { /* Navigate to post details / link */ })
+    }
+
+    Spacer(modifier = Modifier.height(48.dp))
+
+    // Selected Projects Section
+    Text(
+        text = "Selected projects (${projects.size})",
+        style = MaterialTheme.typography.titleLarge,
+        color = MaterialTheme.colorScheme.onBackground,
+    )
+
+    Spacer(modifier = Modifier.height(16.dp))
+
+    // Projects List
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+      projects.forEach { project ->
+        ProjectCard(project = project, onClick = { uriHandler.openUri(project.link) })
+      }
+    }
+
+    Spacer(modifier = Modifier.height(48.dp))
+
+    // Get in touch Section
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+      Text(
+          text = "Get in touch",
+          style = MaterialTheme.typography.titleLarge,
+          color = MaterialTheme.colorScheme.onBackground,
+      )
+
+      Row(
+          verticalAlignment = Alignment.CenterVertically,
+          horizontalArrangement = Arrangement.spacedBy(4.dp),
+      ) {
+        Icon(
+            painter = painterResource(Res.drawable.flag_cr),
+            contentDescription = "Costa Rica Flag",
+            tint = Color.Unspecified,
+            modifier = Modifier.size(width = 14.dp, height = 9.dp),
+        )
+      }
+    }
+
+    Spacer(modifier = Modifier.height(16.dp))
+
+    Text(
+        text = "Email me at andreyacostar@gmail.com or follow me via my social links.",
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+
+    Spacer(modifier = Modifier.height(24.dp))
+
+    // Footer
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+      val links =
+          listOf(
+              "Github" to "https://github.com/MrAndrey24",
+              "LinkedIn" to "https://www.linkedin.com/in/aacostar24/",
+          )
+      links.forEach { (linkName, url) ->
+        val painter =
+            when (linkName.lowercase()) {
+              "github" -> painterResource(Res.drawable.github_dark)
+              "linkedin" -> painterResource(Res.drawable.linkedin)
+              else -> null
+            }
+
+        Row(
+            modifier =
+                Modifier.clip(RoundedCornerShape(8.dp))
+                    .background(MaterialTheme.colorScheme.surface)
+                    .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(8.dp))
+                    .clickable { uriHandler.openUri(url) }
+                    .padding(horizontal = 14.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+          if (painter != null) {
+            Icon(
+                painter = painter,
+                contentDescription = linkName,
+                tint = Color.Unspecified,
+                modifier = Modifier.size(16.dp),
+            )
+          } else {
+            Icon(
+                imageVector = Icons.Default.Link,
+                contentDescription = linkName,
+                tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.size(16.dp),
+            )
+          }
+          Text(
+              text = linkName,
+              style = MaterialTheme.typography.labelLarge,
+              color = MaterialTheme.colorScheme.onSurface,
+          )
+        }
+      }
+    }
+  }
 }
