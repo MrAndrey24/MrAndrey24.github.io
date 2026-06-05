@@ -1,7 +1,5 @@
 package io.github.mrandrey24.portfolio.ui.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,36 +10,34 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Link
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import io.github.mrandrey24.portfolio.ui.components.Header
 import io.github.mrandrey24.portfolio.ui.components.PostCard
 import io.github.mrandrey24.portfolio.ui.components.ProjectCard
-import io.github.mrandrey24.portfolio.ui.data.enums.Screen
+import io.github.mrandrey24.portfolio.ui.components.RowSocialLinks
 import io.github.mrandrey24.portfolio.ui.data.posts
 import io.github.mrandrey24.portfolio.ui.data.projects
 import org.jetbrains.compose.resources.painterResource
 import portfolio.app.shared.generated.resources.Res
 import portfolio.app.shared.generated.resources.flag_cr
-import portfolio.app.shared.generated.resources.github_dark
-import portfolio.app.shared.generated.resources.linkedin
 
 @Composable
-fun Home(onNavigate: (Screen) -> Unit, modifier: Modifier = Modifier) {
-  val uriHandler = LocalUriHandler.current
+fun Home(
+    onNavigatePosts: () -> Unit,
+    modifier: Modifier = Modifier,
+    uriHandler: UriHandler = LocalUriHandler.current,
+) {
   Column(
       modifier =
           modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(bottom = 48.dp)
@@ -68,7 +64,7 @@ fun Home(onNavigate: (Screen) -> Unit, modifier: Modifier = Modifier) {
           style = MaterialTheme.typography.labelLarge,
           color = MaterialTheme.colorScheme.onSurfaceVariant,
           textDecoration = TextDecoration.Underline,
-          modifier = Modifier.clickable { onNavigate(Screen.POSTS) },
+          modifier = Modifier.clickable { onNavigatePosts() },
       )
     }
 
@@ -139,51 +135,7 @@ fun Home(onNavigate: (Screen) -> Unit, modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth(),
     ) {
-      val links =
-          listOf(
-              "Github" to "https://github.com/MrAndrey24",
-              "LinkedIn" to "https://www.linkedin.com/in/aacostar24/",
-          )
-      links.forEach { (linkName, url) ->
-        val painter =
-            when (linkName.lowercase()) {
-              "github" -> painterResource(Res.drawable.github_dark)
-              "linkedin" -> painterResource(Res.drawable.linkedin)
-              else -> null
-            }
-
-        Row(
-            modifier =
-                Modifier.clip(RoundedCornerShape(8.dp))
-                    .background(MaterialTheme.colorScheme.surface)
-                    .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(8.dp))
-                    .clickable { uriHandler.openUri(url) }
-                    .padding(horizontal = 14.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-          if (painter != null) {
-            Icon(
-                painter = painter,
-                contentDescription = linkName,
-                tint = Color.Unspecified,
-                modifier = Modifier.size(16.dp),
-            )
-          } else {
-            Icon(
-                imageVector = Icons.Default.Link,
-                contentDescription = linkName,
-                tint = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.size(16.dp),
-            )
-          }
-          Text(
-              text = linkName,
-              style = MaterialTheme.typography.labelLarge,
-              color = MaterialTheme.colorScheme.onSurface,
-          )
-        }
-      }
+      RowSocialLinks()
     }
   }
 }

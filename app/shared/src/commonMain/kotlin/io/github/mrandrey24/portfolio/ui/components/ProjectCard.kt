@@ -27,13 +27,12 @@ import io.github.mrandrey24.portfolio.ui.data.Project
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun ProjectCard(project: Project, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun ProjectCard(project: Project, onClick: () -> Unit) {
   val isSoon = project.isComingSoon == true
 
   Row(
       modifier =
-          modifier
-              .fillMaxWidth()
+          Modifier.fillMaxWidth()
               .clip(RoundedCornerShape(8.dp))
               .background(MaterialTheme.colorScheme.surface)
               .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(8.dp))

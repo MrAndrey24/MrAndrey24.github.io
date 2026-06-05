@@ -14,7 +14,7 @@ import io.github.mrandrey24.portfolio.ui.theme.PortfolioTheme
 fun App() {
   PortfolioTheme {
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-      AppNavigation()
+      AppNavigation(modifier = Modifier.fillMaxSize())
     }
   }
 }
