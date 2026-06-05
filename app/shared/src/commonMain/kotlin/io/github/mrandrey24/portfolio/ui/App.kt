@@ -12,12 +12,9 @@ import io.github.mrandrey24.portfolio.ui.theme.PortfolioTheme
 @Composable
 @Preview
 fun App() {
-    PortfolioTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            AppNavigation()
-        }
+  PortfolioTheme {
+    Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+      AppNavigation(modifier = Modifier.fillMaxSize())
     }
+  }
 }

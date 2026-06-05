@@ -19,47 +19,47 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import portfolio.app.shared.generated.resources.Res
 import portfolio.app.shared.generated.resources.android
-import portfolio.app.shared.generated.resources.firebase_wordmark
+import portfolio.app.shared.generated.resources.firebase
 import portfolio.app.shared.generated.resources.kotlin
 import portfolio.app.shared.generated.resources.swift
 
 @Composable
-fun TechBadge(
-    name: String,
-    modifier: Modifier = Modifier
-) {
-    val icons = when {
+fun TechBadge(name: String, modifier: Modifier = Modifier) {
+  val icons =
+      when {
         name.contains("Kotlin", ignoreCase = true) -> Res.drawable.kotlin
-        name.contains("Firebase", ignoreCase = true) -> Res.drawable.firebase_wordmark
+        name.contains("Firebase", ignoreCase = true) -> Res.drawable.firebase
         name.contains("Swift", ignoreCase = true) -> Res.drawable.swift
         name.contains("Android", ignoreCase = true) -> Res.drawable.android
         else -> null
-    }
+      }
 
-    Row(
-        modifier = modifier
-            .clip(RoundedCornerShape(6.dp))
-            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f))
-            .border(0.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.3f), RoundedCornerShape(6.dp))
-            .padding(horizontal = 8.dp, vertical = 4.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(6.dp)
-    ) {
-        if (icons != null) {
-            Icon(
-                painter = painterResource(icons),
-                contentDescription = name,
-                tint = Color.Unspecified,
-                modifier = Modifier.size(
-                    width = 46.dp,
-                    height = 12.dp
-                )
-            )
-        }
-        Text(
-            text = name,
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.primary
-        )
+  Row(
+      modifier =
+          modifier
+              .clip(RoundedCornerShape(6.dp))
+              .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f))
+              .border(
+                  0.5.dp,
+                  MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
+                  RoundedCornerShape(6.dp),
+              )
+              .padding(horizontal = 8.dp, vertical = 4.dp),
+      verticalAlignment = Alignment.CenterVertically,
+      horizontalArrangement = Arrangement.spacedBy(6.dp),
+  ) {
+    if (icons != null) {
+      Icon(
+          painter = painterResource(icons),
+          contentDescription = name,
+          tint = Color.Unspecified,
+          modifier = Modifier.size(12.dp),
+      )
     }
+    Text(
+        text = name,
+        style = MaterialTheme.typography.labelLarge,
+        color = MaterialTheme.colorScheme.primary,
+    )
+  }
 }
