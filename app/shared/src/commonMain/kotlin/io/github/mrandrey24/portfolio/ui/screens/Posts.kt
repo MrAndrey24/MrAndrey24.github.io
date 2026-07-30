@@ -16,7 +16,7 @@ import io.github.mrandrey24.portfolio.ui.components.PostCard
 import io.github.mrandrey24.portfolio.ui.data.posts
 
 @Composable
-fun Posts(modifier: Modifier = Modifier) {
+fun Posts(onNavigatePostDetail: (String) -> Unit, modifier: Modifier = Modifier) {
   Column(
       modifier =
           modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(bottom = 48.dp)
@@ -37,7 +37,16 @@ fun Posts(modifier: Modifier = Modifier) {
 
     // Posts List
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-      posts.forEach { post -> PostCard(post = post, onClick = { /* Navigate to post details */ }) }
+      posts.forEach { post ->
+        PostCard(
+            post = post,
+            onClick = {
+              if (post.isComingSoon != true) {
+                onNavigatePostDetail(post.slug)
+              }
+            },
+        )
+      }
     }
   }
 }

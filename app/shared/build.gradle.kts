@@ -51,6 +51,10 @@ kotlin {
 
       // serialization-json
       implementation(libs.kotlinx.serialization.json)
+
+      // Markdown renderer
+      implementation(libs.markdown.renderer)
+      implementation(libs.markdown.renderer.m3)
     }
     commonTest.dependencies { implementation(libs.kotlin.test) }
     jsMain.dependencies { implementation(libs.wrappers.browser) }

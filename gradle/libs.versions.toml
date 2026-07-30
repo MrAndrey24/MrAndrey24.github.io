@@ -20,6 +20,7 @@ navigationCompose = "2.9.2"
 materialIconsCoreVersion = "1.7.3"
 serialization-json = "1.10.0"
 spotless = "8.6.0"
+markdown-render = "0.43.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -58,6 +59,10 @@ navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-co
 # Material Icons
 material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "materialIconsCoreVersion" }
 material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "materialIconsCoreVersion" }
+
+# Markdown Render KMP
+markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", version.ref = "markdown-render" }
+markdown-renderer-m3 = { module = "com.mikepenz:multiplatform-markdown-renderer-m3", version.ref = "markdown-render" }
 
 
 [plugins]

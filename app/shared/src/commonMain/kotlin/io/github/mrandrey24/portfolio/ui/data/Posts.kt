@@ -12,10 +12,10 @@ val posts =
     listOf(
         Props(
             title = "Bus a lo Tico",
-            publishedAt = "",
+            publishedAt = "31/07/2026",
             description =
                 "Solución multiplataforma para el monitoreo inteligente de autobuses en Costa Rica.",
-            slug = "",
-            isComingSoon = true,
+            slug = "busalotico",
+            isComingSoon = false,
         )
     )

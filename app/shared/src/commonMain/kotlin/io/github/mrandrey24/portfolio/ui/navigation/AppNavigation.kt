@@ -22,7 +22,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import io.github.mrandrey24.portfolio.ui.screens.Home
+import io.github.mrandrey24.portfolio.ui.screens.PostDetail
 import io.github.mrandrey24.portfolio.ui.screens.Posts
 
 @Composable
@@ -104,11 +106,25 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         ) {
           composable<HomeRoute> {
             Home(
-                onNavigatePosts = { navController.navigate(PostsRoute) { launchSingleTop = true } }
+                onNavigatePosts = { navController.navigate(PostsRoute) { launchSingleTop = true } },
+                onNavigatePostDetail = { slug ->
+                  navController.navigate(PostDetailRoute(slug)) { launchSingleTop = true }
+                },
             )
           }
 
-          composable<PostsRoute> { Posts() }
+          composable<PostsRoute> {
+            Posts(
+                onNavigatePostDetail = { slug ->
+                  navController.navigate(PostDetailRoute(slug)) { launchSingleTop = true }
+                }
+            )
+          }
+
+          composable<PostDetailRoute> { backStackEntry ->
+            val route: PostDetailRoute = backStackEntry.toRoute()
+            PostDetail(slug = route.slug)
+          }
         }
       }
     }

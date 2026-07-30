@@ -35,6 +35,7 @@ import portfolio.app.shared.generated.resources.flag_cr
 @Composable
 fun Home(
     onNavigatePosts: () -> Unit,
+    onNavigatePostDetail: (String) -> Unit,
     modifier: Modifier = Modifier,
     uriHandler: UriHandler = LocalUriHandler.current,
 ) {
@@ -72,7 +73,14 @@ fun Home(
 
     // Render latest post
     posts.firstOrNull()?.let { post ->
-      PostCard(post = post, onClick = { /* Navigate to post details / link */ })
+      PostCard(
+          post = post,
+          onClick = {
+            if (post.isComingSoon != true) {
+              onNavigatePostDetail(post.slug)
+            }
+          },
+      )
     }
 
     Spacer(modifier = Modifier.height(48.dp))
