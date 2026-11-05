@@ -41,7 +41,7 @@ val projects =
         Project(
             title = "Portfolio",
             techs = listOf("Kotlin Multiplatform"),
-            link = "/",
+            link = "https://github.com/MrAndrey24/mrandrey24.github.io",
             isComingSoon = false,
         ),
         Project(
