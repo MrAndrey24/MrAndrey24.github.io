@@ -44,4 +44,40 @@ val projects =
             link = "/",
             isComingSoon = false,
         ),
+        Project(
+            title = "Clean Architecture - Java Spring Boot",
+            techs = listOf("Java", "Spring Boot"),
+            link = "https://github.com/MrAndrey24/clean-arch",
+            isComingSoon = false,
+        ),
+        Project(
+            title = "Caching Proxy Server",
+            techs = listOf("Go"),
+            link = "https://github.com/MrAndrey24/cache-proxy",
+            isComingSoon = false,
+        ),
+        Project(
+            title = "Media-Organizer",
+            techs = listOf("Python"),
+            link = "https://github.com/MrAndrey24/Media-Organizer",
+            isComingSoon = false,
+        ),
+        Project(
+            title = "URL Shortener Service",
+            techs = listOf("Go"),
+            link = "https://github.com/MrAndrey24/url-shortener",
+            isComingSoon = false,
+        ),
+        Project(
+            title = "Personal-Blog",
+            techs = listOf("Python", "Django"),
+            link = "https://github.com/MrAndrey24/Personal-Blog",
+            isComingSoon = false,
+        ),
+        Project(
+            title = "BeeVsPanda",
+            techs = listOf("Java"),
+            link = "https://github.com/MrAndrey24/BeeVsPanda",
+            isComingSoon = false,
+        ),
     )

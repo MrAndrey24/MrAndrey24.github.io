@@ -42,8 +42,13 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import portfolio.app.shared.generated.resources.Res
 import portfolio.app.shared.generated.resources.android
+import portfolio.app.shared.generated.resources.django
 import portfolio.app.shared.generated.resources.firebase
+import portfolio.app.shared.generated.resources.golang
+import portfolio.app.shared.generated.resources.java
 import portfolio.app.shared.generated.resources.kotlin
+import portfolio.app.shared.generated.resources.python
+import portfolio.app.shared.generated.resources.spring
 import portfolio.app.shared.generated.resources.swift
 
 @Composable
@@ -54,6 +59,11 @@ fun TechBadge(name: String, modifier: Modifier = Modifier) {
         name.contains("Firebase", ignoreCase = true) -> Res.drawable.firebase
         name.contains("Swift", ignoreCase = true) -> Res.drawable.swift
         name.contains("Android", ignoreCase = true) -> Res.drawable.android
+        name.contains("Java", ignoreCase = true) -> Res.drawable.java
+        name.contains("Spring Boot", ignoreCase = true) -> Res.drawable.spring
+        name.contains("Django", ignoreCase = true) -> Res.drawable.django
+        name.contains("Go", ignoreCase = true) -> Res.drawable.golang
+        name.contains("Python", ignoreCase = true) -> Res.drawable.python
         else -> null
       }
 
